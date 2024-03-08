@@ -1,9 +1,5 @@
 package com.samsungsds.msa.biz.order.query;
 
-import com.samsungsds.msa.biz.order.query.application.queries.FindAllOrdersQuery;
-import com.samsungsds.msa.biz.order.query.application.queries.FindOrderByIdQuery;
-import com.samsungsds.msa.biz.order.query.application.queries.FindOrderByOriginQuery;
-import com.samsungsds.msa.biz.order.query.application.dispatcher.QueryHandler;
 import com.samsungsds.msa.cqrs.dispatcher.QueryDispatcher;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
