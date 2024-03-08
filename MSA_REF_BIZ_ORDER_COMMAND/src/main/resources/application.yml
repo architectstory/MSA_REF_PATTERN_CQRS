@@ -1,0 +1,123 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: MSA_REF_BIZ_ORDER_COMMAND
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem:MSA;DB_CLOSE_DELAY=-1;LOCK_TIMEOUT=2500;AUTOCOMMIT=OFF;DATABASE_TO_UPPER=true;
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+      maximum-pool-size: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      pool-name: HikariCP
+      read-only: false
+      connection-test-query: select 1
+  h2:
+    console:
+      enabled: true
+      path: /h2console
+      settings:
+        web-allow-others: true
+        trace: false
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+
+# Kafka Configuration
+  kafka:
+    bootstrap-servers: localhost:9092
+    topic: msa-topic
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: msa-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+retry:
+  maxAttempts: 3 # Number of retries
+  maxDelay: 5000 # Maximum back-off time between retries in milliseconds
+
+logging:
+  config: classpath:log4j2.xml
+
+spring-doc:
+  version: v1.0.0
+  packages-to-scan: com.samsungsds
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    try-it-out-enabled: false
+    filter: false
+    syntax-highlight:
+      activated: true
+    operations-sorter: method
+    tags-sorter: alpha
+  api-docs:
+    path: /api-docs
+    groups:
+      enabled: true
+    cache:
+      disabled: true
+    default-consumes-media-type: application/json
+
+# Message read used property file
+# GlobalHandlerException Message
+exception1:
+  error:
+    msg: Client made a bad request - {0}
+exception2:
+  error:
+    msg: Kafka server is currently unavailable. Please try again later. - {0}
+exception3:
+  error:
+    msg: Kafka Exception - {0}
+exception4:
+  error:
+    msg: Error while placing the order - {0}
+
+# OrderController Message
+create:
+  order:
+    msg: Order created successfully!
+update:
+  order:
+    msg: Order updated successfully!
+cancel:
+  order:
+    msg: Order cancelled successfully!
+
+# OrderCommandDispatcher Message
+notFound:
+  commandHandler:
+    msg: No Command handler defined!
+multiple:
+  commandHandler:
+    msg: Multiple Command handlers defined for a command!
+
+# OrderAggregate Message
+noOrder:
+  exists:
+    msg: Order can not be updated as no order exists!
+order:
+  alreadyCancel:
+    msg: An Order has already been cancelled!
+
+# OrderEventStore Message
+aggregate:
+  notFound:
+    msg: Aggregate not found for Id
+
+# OrderEventProducer Message
+kafkaPublish:
+  msg: Message sent to Kafka -> %s
+

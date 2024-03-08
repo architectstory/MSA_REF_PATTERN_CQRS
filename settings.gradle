@@ -1,0 +1,5 @@
+rootProject.name = 'MSA_REF_PATTERN_CQRS'
+include 'MSA_REF_CQRS'
+include 'MSA_REF_BIZ_ORDER_COMMAND'
+include 'MSA_REF_BIZ_ORDER_QUERY'
+
