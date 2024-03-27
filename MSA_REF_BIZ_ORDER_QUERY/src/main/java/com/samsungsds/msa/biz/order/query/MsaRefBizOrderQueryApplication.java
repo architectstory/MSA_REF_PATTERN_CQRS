@@ -1,12 +1,16 @@
-package com.samsungsds.msa.biz.order.query;
+package com.samsungsds.msa.biz.order;
 
+import com.samsungsds.msa.biz.order.application.queries.FindAllOrdersQuery;
+import com.samsungsds.msa.biz.order.application.queries.FindOrderByIdQuery;
+import com.samsungsds.msa.biz.order.application.queries.FindOrderByOriginQuery;
+import com.samsungsds.msa.biz.order.application.dispatcher.QueryHandler;
 import com.samsungsds.msa.cqrs.dispatcher.QueryDispatcher;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages="com.samsungsds.msa.biz.order")
 public class MsaRefBizOrderQueryApplication {
 
     @Autowired

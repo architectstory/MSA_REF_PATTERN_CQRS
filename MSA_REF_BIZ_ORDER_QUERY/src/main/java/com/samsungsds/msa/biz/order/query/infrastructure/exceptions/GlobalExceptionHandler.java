@@ -1,5 +1,6 @@
-package com.samsungsds.msa.biz.order.query.infrastructure.exceptions;
+package com.samsungsds.msa.biz.order.infrastructure.exceptions;
 
+import com.samsungsds.msa.cqrs.dto.BaseResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
